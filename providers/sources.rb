@@ -71,7 +71,7 @@ def load_current_resource
       @current_resource.exists = false
     end
   else
-    log "Failed to run nuget_sources action :load_current_resource, #{cmd_current_values.stderr}" do
+    log "Failed to run nuget_sources action :load_current_resource, #{cmd.stderr}" do
       level :warn
     end
   end
