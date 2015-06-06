@@ -58,7 +58,7 @@ def load_current_resource
   @current_resource = Chef::Resource::NugetSources.new(new_resource.name)
   @current_resource.name(new_resource.name)
   @current_resource.source(new_resource.source)
-  cmd = shell_out("nuget.exe sources list")
+  cmd = shell_out("C:\\ProgramData\\chocolatey\\bin\\nuget.exe sources list")
   Chef::Log.debug("#{new_resource} sources list command output: #{cmd.stdout}")
   regex = /(\d?[0-9]+\.\s+)(#{new_resource.name} \[Enabled\])\s+(#{new_resource.source})/
   Chef::Log.debug('Running regex')
