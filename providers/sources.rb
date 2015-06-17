@@ -32,7 +32,7 @@ use_inline_resources
 
 action :add do
   unless @current_resource.exists
-    cmd = "nuget sources add -name \"#{new_resource.name}\" -source #{new_resource.source}"
+    cmd = "C:\\ProgramData\\chocolatey\\bin\\nuget.exe sources add -name \"#{new_resource.name}\" -source #{new_resource.source}"
     Chef::Log.debug(cmd)
     shell_out!(cmd)
     new_resource.updated_by_last_action(true)
