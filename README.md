@@ -20,7 +20,7 @@ License and Authors
 - Author:: Blair Hamilton <bhamilton@draftkings.com>
 
 ```text
-Copyright 2015, DraftKings, Inc.
+Copyright 2015, DraftKings Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
