@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+transport:
+  name: winrm
+  elevated: true
+
+platforms: # Disabled for now as windows VMs are hard to get hold of consistently
+#  - name: windows-2008R2
+#  - name: windows-2012R2
+#  - name: windows-8.1
+
+suites:
+  - name: default
+    run_list:
+      - recipe[nuget::default]
+      - recipe[nuget-test::default]
+    attributes:
+      nuget:
+        repositories:
+          name1: http://example.com/name1
+          name2: http://example.com/name2

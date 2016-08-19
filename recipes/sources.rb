@@ -1,9 +1,7 @@
 #
-# Author:: Blair Hamilton (bhamilton@draftkings.com)
+# Author:: Jonathan Morley (morley.jonathan@gmail.com)
 # Cookbook Name:: nuget
-# Recipe:: default
-#
-# Copyright:: Copyright (c) 2015, DraftKings Inc.
+# Recipe:: sources
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +16,10 @@
 # limitations under the License.
 #
 
-include_recipe 'chocolatey::default'
-
-# Install the command line application
-chocolatey 'nuget.commandline'
-
-include_recipe 'nuget::sources'
+node['nuget']['repositories'].each do |name, source|
+  nuget_sources name do
+    action :add
+    source source
+    config_file "#{ENV['PROGRAMDATA']}/NuGet/Config/NuGet.config"
+  end
+end

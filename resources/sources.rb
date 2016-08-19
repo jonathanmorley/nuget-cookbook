@@ -1,5 +1,6 @@
 #
 # Author:: Blair Hamilton (bhamilton@draftkings.com>)
+# Author:: Jonathan Morley (morley.jonathan@gmail.com>)
 # Cookbook Name:: nuget
 # Resource:: source
 #
@@ -18,9 +19,64 @@
 # limitations under the License.
 #
 
-actions :add, :remove
+require 'chef/mixin/shell_out'
+include Chef::Mixin::ShellOut
+
+property :name, kind_of: String, name_attribute: true
+property :nuget_exe, kind_of: String, default: 'nuget.exe'
+property :source, kind_of: String
+property :config_file, kind_of: String
+
 default_action :add
 
-attribute :name, kind_of: String, name_attribute: true
-attribute :source, kind_of: String
-attr_accessor :exists
+load_current_value do
+  cmd = shell_out("#{nuget_exe} sources list")
+  Chef::Log.debug("nuget sources list command output:\n#{cmd.stdout}")
+  regex = /\s*\d+\.\s+(?<name>#{name}) (?<enabled>\[Enabled\])?\s+(?<source>.+)/
+
+  if cmd.stderr.empty?
+    result = cmd.stdout.match(regex)
+    Chef::Log.debug("current_resource match output: #{result.inspect}")
+    source result[:source].strip if result
+  else
+    log "Failed to run nuget sources list. Error:\n#{cmd.stderr}" do
+      level :warn
+    end
+  end
+end
+
+action :add do
+  converge_if_changed :source do
+    directory ::File.dirname(config_file) do
+      action :create
+      recursive true
+    end
+
+    file config_file do
+      action :create_if_missing
+      content '<?xml version="1.0" encoding="utf-8"?><configuration />'
+    end
+
+    nuget_cmd = "#{nuget_exe} sources Add"
+    nuget_cmd << " -Name \"#{new_resource.name}\"" if new_resource.name
+    nuget_cmd << " -Source \"#{new_resource.source}\"" if new_resource.source
+    nuget_cmd << " -ConfigFile \"#{new_resource.config_file}\"" if new_resource.config_file
+
+    execute 'add nuget source' do
+      action :run
+      command nuget_cmd
+    end
+  end
+end
+
+action :remove do
+  nuget_cmd = "#{nuget_exe} sources Remove"
+  nuget_cmd << " -Name \"#{new_resource.name}\"" if new_resource.name
+  nuget_cmd << " -Source \"#{new_resource.source}\"" if new_resource.source
+  nuget_cmd << " -ConfigFile \"#{new_resource.config_file}\"" if new_resource.config_file
+
+  execute 'remove nuget source' do
+    action :run
+    command nuget_cmd
+  end
+end
