@@ -24,4 +24,10 @@ chocolatey 'nuget.commandline' do
   action :install
 end
 
-include_recipe 'nuget::sources'
+node['nuget']['repositories'].each do |name, source|
+  nuget_sources name do
+    action :add
+    source source
+    config_file "#{ENV['PROGRAMDATA']}/NuGet/Config/NuGet.config"
+  end
+end
