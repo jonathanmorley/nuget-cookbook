@@ -9,8 +9,8 @@ verifier:
   name: inspec
 
 platforms: # Disabled for now as windows VMs are hard to get hold of consistently
-#  - name: windows-8.1
-#  - name: windows-2008R2
+  #  - name: windows-8.1
+  #  - name: windows-2008R2
   - name: windows-2012R2
 
 suites:
