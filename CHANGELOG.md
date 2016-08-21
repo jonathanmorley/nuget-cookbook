@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the nuget cookbook.
 
+## 1.1.1
+
+- Removed merged sources recipe into default [Blair Hamilton]
+
 ## 1.1.0
 
 - Use new custom resources, add tests, add sources recipe [Jonathan Morley]
