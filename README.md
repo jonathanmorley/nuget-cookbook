@@ -1,26 +1,28 @@
-nuget cookbook
-===================
+# nuget cookbook
+
+[![Build Status](https://travis-ci.org/blairham/nuget-cookbook.svg?branch=master)](http://travis-ci.org/blairham/nuget-cookbook) [![Cookbook Version](https://img.shields.io/cookbook/v/nuget.svg)](https://supermarket.chef.io/cookbooks/nuget)
+
 This cookbook installs nuget commandline tools and provides a provider for adding
 and removing nuget sources.
 
+## Requirements
 
-Requirements
-------------
-### platforms
+### Platforms
 
 * Windows 8.1
 * Windows Server 2012 R2
 * Windows Server 2012 R2 Core
 
 #### cookbooks
-- `chocolatey`
 
-License and Authors
------------------
-- Author:: Blair Hamilton <bhamilton@draftkings.com>
+* [chocolatey][0]
+
+## License and Authors
+
+* Author:: Blair Hamilton <blairham@me.com>
 
 ```text
-Copyright 2015, DraftKings Inc.
+Copyright 2015, Blair Hamilton
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34,3 +36,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+[0]: https://github.com/chocolatey/chocolatey-cookbook

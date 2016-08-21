@@ -4,7 +4,7 @@
 # Cookbook Name:: nuget
 # Resource:: source
 #
-# Copyright:: Copyright (c) 2015, DraftKings Inc.
+# Copyright 2015, Blair Hamilton
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

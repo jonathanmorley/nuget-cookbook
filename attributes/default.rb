@@ -1,7 +1,7 @@
 #
 # Author:: Blair Hamilton (blairham@me.com)
 # Cookbook Name:: nuget
-# Recipe:: default
+# Attribute:: default
 #
 # Copyright 2015, Blair Hamilton
 #
@@ -16,12 +16,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-include_recipe 'chocolatey::default'
-
-# Install the command line application
-chocolatey 'nuget.commandline' do
-  action :install
-end
-
-include_recipe 'nuget::sources'
+default['nuget']['repositories'] = []
