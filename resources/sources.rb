@@ -39,9 +39,7 @@ load_current_value do
     Chef::Log.debug("current_resource match output: #{result.inspect}")
     source result[:source].strip if result
   else
-    log "Failed to run nuget sources list. Error:\n#{cmd.stderr}" do
-      level :warn
-    end
+    Chef::Log.warn("Failed to run nuget sources list. Error:\n#{cmd.stderr}")
   end
 end
 
