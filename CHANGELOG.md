@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the nuget cookbook.
 
+## 1.1.2
+
+- Fix 'log' not found [Jonathan Morley]
+
 ## 1.1.1
 
 - Merged sources recipe into default [Blair Hamilton]
