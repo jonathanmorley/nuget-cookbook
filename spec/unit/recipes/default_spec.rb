@@ -14,6 +14,10 @@ describe 'nuget::default' do
       expect { chef_run }.to_not raise_error
     end
 
+    it 'includes chocolatey::default recipe' do
+      expect(chef_run).to include_recipe('chocolatey::default')
+    end
+
     it 'installs package nuget.commandline' do
       expect(chef_run).to install_chocolatey('nuget.commandline')
     end
