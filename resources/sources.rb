@@ -52,7 +52,7 @@ action :add do
         action :create
         recursive true
       end
-  
+
       file config_file do
         action :create_if_missing
         content '<?xml version="1.0" encoding="utf-8"?><configuration />'
