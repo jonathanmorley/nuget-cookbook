@@ -18,10 +18,14 @@
 # limitations under the License.
 
 include_recipe 'chocolatey::default'
-
-# Install the command line application
-chocolatey 'nuget.commandline' do
+chocolatey_package 'nuget.commandline' do
   action :install
+  notifies :run, 'ruby_block[add nuget to PATH]', :immediately
+end
+
+ruby_block 'add nuget to PATH' do
+  action :nothing
+  block { ENV['PATH'] += ";#{ENV['PROGRAMDATA']}\\chocolatey\\bin" }
 end
 
 node['nuget']['repositories'].each do |name, source|

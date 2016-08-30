@@ -18,4 +18,4 @@
 # limitations under the License.
 #
 
-default['nuget']['repositories'] = []
+default['nuget']['repositories'] = {}
