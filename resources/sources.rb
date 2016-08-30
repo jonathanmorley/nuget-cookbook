@@ -24,8 +24,8 @@ include Chef::Mixin::ShellOut
 
 property :name, kind_of: String, name_attribute: true
 property :nuget_exe, kind_of: String, default: 'nuget.exe'
-property :source, kind_of: String
-property :config_file, kind_of: String
+property :source, kind_of: [String, nil]
+property :config_file, kind_of: [String, nil]
 
 default_action :add
 
@@ -47,14 +47,16 @@ end
 
 action :add do
   converge_if_changed :source do
-    directory ::File.dirname(config_file) do
-      action :create
-      recursive true
-    end
-
-    file config_file do
-      action :create_if_missing
-      content '<?xml version="1.0" encoding="utf-8"?><configuration />'
+    if config_file
+      directory ::File.dirname(config_file) do
+        action :create
+        recursive true
+      end
+  
+      file config_file do
+        action :create_if_missing
+        content '<?xml version="1.0" encoding="utf-8"?><configuration />'
+      end
     end
 
     nuget_cmd = "#{nuget_exe} sources Add"
