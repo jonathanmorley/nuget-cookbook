@@ -24,8 +24,8 @@ include Chef::Mixin::ShellOut
 
 property :name, kind_of: String, name_attribute: true
 property :nuget_exe, kind_of: String, default: 'nuget.exe'
-property :source, kind_of: String
-property :config_file, kind_of: String
+property :source, kind_of: [String,nil]
+property :config_file, kind_of: [String,nil]
 
 default_action :add
 
