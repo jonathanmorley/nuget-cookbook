@@ -23,14 +23,13 @@ require 'chef/mixin/shell_out'
 include Chef::Mixin::ShellOut
 
 property :name, kind_of: String, name_attribute: true
-property :nuget_exe, kind_of: String, default: 'nuget.exe'
-property :source, kind_of: String
-property :config_file, kind_of: String
+property :config_file, kind_of: String, default: "#{ENV['PROGRAMDATA']}\\NuGet\\Config\\NuGet.config"
+property :source, kind_of: [String, nil]
 
 default_action :add
 
 load_current_value do
-  cmd = shell_out("#{nuget_exe} sources list")
+  cmd = shell_out('nuget sources list')
   Chef::Log.debug("nuget sources list command output:\n#{cmd.stdout}")
   regex = /\s*\d+\.\s+(?<name>#{name}) (?<enabled>\[Enabled\])?\s+(?<source>.+)/
 
@@ -45,17 +44,19 @@ end
 
 action :add do
   converge_if_changed :source do
-    directory ::File.dirname(config_file) do
-      action :create
-      recursive true
+    if config_file
+      directory ::File.dirname(config_file) do
+        action :create
+        recursive true
+      end
+
+      file config_file do
+        action :create_if_missing
+        content '<?xml version="1.0" encoding="utf-8"?><configuration />'
+      end
     end
 
-    file config_file do
-      action :create_if_missing
-      content '<?xml version="1.0" encoding="utf-8"?><configuration />'
-    end
-
-    nuget_cmd = "#{nuget_exe} sources Add"
+    nuget_cmd = 'nuget sources Add'
     nuget_cmd << " -Name \"#{new_resource.name}\"" if new_resource.name
     nuget_cmd << " -Source \"#{new_resource.source}\"" if new_resource.source
     nuget_cmd << " -ConfigFile \"#{new_resource.config_file}\"" if new_resource.config_file
@@ -68,7 +69,7 @@ action :add do
 end
 
 action :remove do
-  nuget_cmd = "#{nuget_exe} sources Remove"
+  nuget_cmd = 'nuget sources Remove'
   nuget_cmd << " -Name \"#{new_resource.name}\"" if new_resource.name
   nuget_cmd << " -Source \"#{new_resource.source}\"" if new_resource.source
   nuget_cmd << " -ConfigFile \"#{new_resource.config_file}\"" if new_resource.config_file

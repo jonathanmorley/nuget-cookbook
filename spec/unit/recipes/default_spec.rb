@@ -20,6 +20,11 @@ describe 'nuget::default' do
 
     it 'installs package nuget.commandline' do
       expect(chef_run).to install_chocolatey('nuget.commandline')
+      expect(chef_run.chocolatey('nuget.commandline')).to notify('ruby_block[add nuget to PATH]').to(:run)
+    end
+
+    it 'does not add chocolatey bins to the PATH environment' do
+      expect(chef_run.ruby_block('add nuget to PATH')).to do_nothing
     end
   end
 end
