@@ -14,7 +14,7 @@ environment:
   matrix:
     - ruby_version: "21"
 
-clone_folder: c:\projects\chocolatey-cookbook
+clone_folder: c:\projects\nuget-cookbook
 clone_depth: 1
 branches:
   only:
@@ -28,7 +28,7 @@ install:
   - ps: ruby --version
   - ps: gem --version
   - ps: gem install bundler --quiet --no-ri --no-rdoc
-  - ps: Invoke-WebRequest -Uri http://curl.haxx.se/ca/cacert.pem -OutFile c:\projects\chocolatey-cookbook\certs.pem
+  - ps: Invoke-WebRequest -Uri http://curl.haxx.se/ca/cacert.pem -OutFile c:\projects\nuget-cookbook\certs.pem
   - ps: bundler --version
 
 build_script:
