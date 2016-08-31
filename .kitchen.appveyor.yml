@@ -1,20 +1,17 @@
 ---
 driver:
-  name: vagrant
+  name: proxy
+  host: localhost
+  reset_command: "exit 0"
+  username: <%= ENV["winrm_user"] %>
+  password: <%= ENV["winrm_pass"] %>
+  port: <%= ENV["winrm_port"] %>
 
 provisioner:
   name: chef_zero
 
-verifier:
-  name: inspec
-
 platforms:
-  - name: windows-10
-    driver:
-      box: chusiang/win10-x64-ansible
   - name: windows-2012R2
-    driver:
-      box: mwrock/Windows2012R2
 
 suites:
   - name: default

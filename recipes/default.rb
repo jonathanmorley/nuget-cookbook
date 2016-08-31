@@ -18,6 +18,7 @@
 # limitations under the License.
 
 include_recipe 'chocolatey::default'
+
 chocolatey_package 'nuget.commandline' do
   action :install
   notifies :run, 'ruby_block[add nuget to PATH]', :immediately
