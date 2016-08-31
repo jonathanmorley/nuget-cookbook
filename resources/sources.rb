@@ -29,7 +29,7 @@ property :source, kind_of: [String, nil]
 default_action :add
 
 load_current_value do
-  cmd = shell_out("nuget sources list")
+  cmd = shell_out('nuget sources list')
   Chef::Log.debug("nuget sources list command output:\n#{cmd.stdout}")
   regex = /\s*\d+\.\s+(?<name>#{name}) (?<enabled>\[Enabled\])?\s+(?<source>.+)/
 
@@ -58,7 +58,7 @@ action :add do
       end
     end
 
-    nuget_cmd = "nuget sources Add"
+    nuget_cmd = 'nuget sources Add'
     nuget_cmd << " -Name \"#{new_resource.name}\"" if new_resource.name
     nuget_cmd << " -Source \"#{new_resource.source}\"" if new_resource.source
     nuget_cmd << " -ConfigFile \"#{new_resource.config_file}\"" if new_resource.config_file
@@ -71,7 +71,7 @@ action :add do
 end
 
 action :remove do
-  nuget_cmd = "nuget sources Remove"
+  nuget_cmd = 'nuget sources Remove'
   nuget_cmd << " -Name \"#{new_resource.name}\"" if new_resource.name
   nuget_cmd << " -Source \"#{new_resource.source}\"" if new_resource.source
   nuget_cmd << " -ConfigFile \"#{new_resource.config_file}\"" if new_resource.config_file
