@@ -1,6 +1,7 @@
 ---
 driver:
   name: vagrant
+  gui: false
 
 provisioner:
   name: chef_zero
@@ -9,9 +10,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-10
-    driver:
-      box: chusiang/win10-x64-ansible
+  # - name: windows-10
   - name: windows-2012R2
     driver:
       box: mwrock/Windows2012R2
