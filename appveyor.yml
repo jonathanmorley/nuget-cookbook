@@ -36,3 +36,4 @@ build_script:
 
 test_script:
   - bundle exec kitchen verify
+  - bundle exec inspec exec test/integration/default/**/*_spec.rb --format documentation
