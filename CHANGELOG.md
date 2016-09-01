@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the nuget cookbook.
 
-## 1.2.3
+## 1.1.3
 
 - Added AppVeyor integration [Jonathan Morley]
 - Added Nuget.exe to path [Jonathan Morley]
