@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the nuget cookbook.
 
+## 1.2.3
+
+- Added AppVeyor integration [Jonathan Morley]
+- Added Nuget.exe to path [Jonathan Morley]
+- Defaulted config_file to Chocolatey installed path [Jonathan Morley]
+
 ## 1.1.2
 
 - Fix 'log' not found [Jonathan Morley]
