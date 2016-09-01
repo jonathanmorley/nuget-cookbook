@@ -36,4 +36,4 @@ build_script:
 
 test_script:
   - bundle exec rake
-  - bundle exec rake integration:kitchen:all
+  - bundle exec kitchen verify
