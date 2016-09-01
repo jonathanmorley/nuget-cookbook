@@ -1,6 +1,8 @@
 # nuget cookbook
 
-[![Build Status](https://travis-ci.org/blairham/nuget-cookbook.svg?branch=master)](http://travis-ci.org/blairham/nuget-cookbook) [![Cookbook Version](https://img.shields.io/cookbook/v/nuget.svg)](https://supermarket.chef.io/cookbooks/nuget)
+[![Build Status](https://travis-ci.org/blairham/nuget-cookbook.svg?branch=master)](http://travis-ci.org/blairham/nuget-cookbook)
+[![Build status](https://ci.appveyor.com/api/projects/status/hll4jxvyt93twayv?svg=true)](https://ci.appveyor.com/project/blairham58843/nuget-cookbook)
+[![Cookbook Version](https://img.shields.io/cookbook/v/nuget.svg)](https://supermarket.chef.io/cookbooks/nuget)
 
 This cookbook installs nuget commandline tools and provides a provider for adding
 and removing nuget sources.
